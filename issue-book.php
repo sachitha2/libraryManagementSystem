@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 error_reporting(0);
 include('includes/config.php');
 if(strlen($_SESSION['login'])==0)
@@ -11,27 +12,46 @@ else{
 if(isset($_POST['issue']))
 {
 	
-
-		//	print_r($_POST);
-
-		$studentid=strtoupper($_POST['studentid']);
 		$bookid=$_POST['booikid'];
-		$sql="INSERT INTO  tblissuedbookdetails(StudentID,BookId) VALUES(:studentid,:bookid)";
-		$query = $dbh->prepare($sql);
-		$query->bindParam(':studentid',$studentid,PDO::PARAM_STR);
-		$query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
-		$query->execute();
-		$lastInsertId = $dbh->lastInsertId();
-		if($lastInsertId)
+		//	print_r($_POST);
+		//check  book availability
+ 
+    	$sql ="SELECT BookName,id FROM tblbooks WHERE (ISBNNumber=:bookid)";
+		$query= $dbh -> prepare($sql);
+		$query-> bindParam(':bookid', $bookid, PDO::PARAM_STR);
+		$query-> execute();
+		$results = $query -> fetchAll(PDO::FETCH_OBJ);
+		if($query -> rowCount() == 0)
 		{
-			$_SESSION['msg']="Book issued successfully";
-			header('location:issued-books.php');
+			echo("Book available");
+		  	//Book available
+			$studentid=strtoupper($_POST['studentid']);
+		
+			$sql="INSERT INTO  tblissuedbookdetails(StudentID,BookId) VALUES(:studentid,:bookid)";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(':studentid',$studentid,PDO::PARAM_STR);
+			$query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
+			$query->execute();
+			$lastInsertId = $dbh->lastInsertId();
+			if($lastInsertId)
+			{
+				$_SESSION['msg']="Book issued successfully";
+				header('location:issued-books.php');
+			}
+			else 
+			{
+				$_SESSION['error']="Something went wrong. Please try again";
+				header('location:issued-books.php');
+			}
 		}
-		else 
-		{
-			$_SESSION['error']="Something went wrong. Please try again";
-			header('location:issued-books.php');
+		 else{	
+			 echo("Book not available");
+			 //book  not available
 		}
+		//check  book availability	
+	
+	
+		
 
 }
 ?>
@@ -96,7 +116,7 @@ error:function (){}
       <!------MENU SECTION START-->
 <?php include('includes/header.php');?>
 <!-- MENU SECTION END-->
-    <div class="content-wra
+    
     <div class="content-wrapper">
          <div class="container">
         <div class="row pad-botm">
@@ -107,7 +127,7 @@ error:function (){}
 
 </div>
 <div class="row">
-<div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1"">
+<div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
 <div class="panel panel-info">
 <div class="panel-heading">
 Reserve a New Book
