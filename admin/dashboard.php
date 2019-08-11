@@ -1,12 +1,13 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
-  { 
-header('location:index.php');
-}
-else{?>
+  error_reporting(0);
+  include('includes/config.php');
+	session_start();
+		if($_SESSION['login'] != 'admin'){
+			header("location:index.php");
+		}
+	
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -229,4 +230,4 @@ $listdcats=$query5->rowCount();
     <script src="assets/js/custom.js"></script>
 </body>
 </html>
-<?php } ?>
+<?php  ?>

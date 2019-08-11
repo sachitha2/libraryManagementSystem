@@ -103,6 +103,6 @@ echo "<script>alert('Invalid Details');</script>";
     <script src="assets/js/bootstrap.js"></script>
       <!-- CUSTOM SCRIPTS  -->
     <script src="assets/js/custom.js"></script>
-</script>
+
 </body>
 </html>

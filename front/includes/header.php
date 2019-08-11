@@ -40,13 +40,13 @@
 				<li><a href='books.php'><span><b>Books</b></span></a></li>
 			    <li><a href='front/about.php'><span>About</span></a></li>
 			    <li><a href='front/contact.php'><span>Contact</span></a></li>
-			 	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+			 	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				
 				<li><a href='dashboard.php'><span>Dashboard</span></a></li>
 				<li><a href='login.php'><span>User Login</span></a></li>
 				<li><a href='signup.php'><span>Signup</span></a></li>
-				<li><a href='../adminlogin'><span>Admin</span></a></li>
+				<li><a href='adminLogin.php'><span>Admin</span></a></li>
 				<div class="clear"></div>
 			 </ul>
 	</div>
