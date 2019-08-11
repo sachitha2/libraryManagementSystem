@@ -10,24 +10,28 @@ else{
 
 if(isset($_POST['issue']))
 {
-$studentid=strtoupper($_POST['studentid']);
-$bookid=$_POST['bookdetails'];
-$sql="INSERT INTO  tblissuedbookdetails(StudentID,BookId) VALUES(:studentid,:bookid)";
-$query = $dbh->prepare($sql);
-$query->bindParam(':studentid',$studentid,PDO::PARAM_STR);
-$query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
-$query->execute();
-$lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
-$_SESSION['msg']="Book issued successfully";
-header('location:manage-issued-books.php');
-}
-else 
-{
-$_SESSION['error']="Something went wrong. Please try again";
-header('location:manage-issued-books.php');
-}
+	
+
+		//	print_r($_POST);
+
+		$studentid=strtoupper($_POST['studentid']);
+		$bookid=$_POST['booikid'];
+		$sql="INSERT INTO  tblissuedbookdetails(StudentID,BookId) VALUES(:studentid,:bookid)";
+		$query = $dbh->prepare($sql);
+		$query->bindParam(':studentid',$studentid,PDO::PARAM_STR);
+		$query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
+		$query->execute();
+		$lastInsertId = $dbh->lastInsertId();
+		if($lastInsertId)
+		{
+			$_SESSION['msg']="Book issued successfully";
+			header('location:issued-books.php');
+		}
+		else 
+		{
+			$_SESSION['error']="Something went wrong. Please try again";
+			header('location:issued-books.php');
+		}
 
 }
 ?>
@@ -38,7 +42,7 @@ header('location:manage-issued-books.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | Issue a new Book</title>
+    <title>Online Library Management System | Reserve a new Book</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -106,14 +110,28 @@ error:function (){}
 <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1"">
 <div class="panel panel-info">
 <div class="panel-heading">
-Issue a New Book
+Reserve a New Book
 </div>
+
+
+<?php
+//	print_r($_SESSION);
+	
+	$sql ="SELECT * FROM tblbooks ";
+	$query= $dbh -> prepare($sql);
+	$query-> execute();
+	$results = $query -> fetchAll(PDO::FETCH_OBJ);
+	$cnt=1;
+	
+	
+	
+	?>
 <div class="panel-body">
 <form role="form" method="post">
 
 <div class="form-group">
 <label>Student ID<span style="color:red;">*</span></label>
-<input class="form-control" type="text" name="studentid" id="studentid" onBlur="getstudent()" autocomplete="off"  required />
+<input class="form-control" type="text" name="studentid" value="<?php echo($_SESSION['stdid']) ?>" id="studentid"  autocomplete="off"  readonly  />
 </div>
 
 <div class="form-group">
@@ -126,15 +144,43 @@ Issue a New Book
 
 <div class="form-group">
 <label>ISBN Number or Book Title<span style="color:red;">*</span></label>
-<input class="form-control" type="text" name="booikid" id="bookid" onBlur="getbook()"  required="required" />
+<input class="form-control" type="text" name="booikid" id="bookid" onBlur="getbook()"   list="customersList" />
+<div id="get_book_name"> </div>
 </div>
 
- <div class="form-group">
+	
+        	
+			<datalist id="customersList">
+				
+    			<?php
+		
+		
+						
+		
+					if($query -> rowCount() > 0)
+						{
+						  foreach ($results as $result) {?>
+							<option value="<?php echo htmlentities($result->ISBNNumber);?>"><?php echo htmlentities($result->BookName);?></option>
+							<b>Book Name :</b> 
+							<?php  
+							echo htmlentities($result->BookName);
 
-  <select  class="form-control" name="bookdetails" id="get_book_name" readonly>
-   
- </select>
- </div>
+						}
+						}
+						 else{?>
+
+						<option class="others"> Invalid ISBN Number</option>
+						<?php
+
+						}
+					
+	
+				?>
+			</datalist>
+
+
+
+ 
 <button type="submit" name="issue" id="submit" class="btn btn-info">Issue Book </button>
 
                                     </form>

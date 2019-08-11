@@ -12,7 +12,7 @@ $cnt=1;
 if($query -> rowCount() > 0)
 {
   foreach ($results as $result) {?>
-<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BookName);?></option>
+<!--<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BookName);?></option>-->
 <b>Book Name :</b> 
 <?php  
 echo htmlentities($result->BookName);

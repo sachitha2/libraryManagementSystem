@@ -15,7 +15,7 @@ $category=$_POST['category'];
 $author=$_POST['author'];
 $isbn=$_POST['isbn'];
 $price=$_POST['price'];
-$sql="INSERT INTO  tblbooks(BookName,CatId,AuthorId,ISBNNumber,BookPrice) VALUES(:bookname,:category,:author,:isbn,:price)";
+$sql="INSERT INTO  tblbooks(BookName,CatId,AuthorId,ISBNNumber,BookPrice,s) VALUES(:bookname,:category,:author,:isbn,:price,1)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':bookname',$bookname,PDO::PARAM_STR);
 $query->bindParam(':category',$category,PDO::PARAM_STR);
@@ -84,7 +84,7 @@ Book Info
 
 <div class="form-group">
 <label> Category<span style="color:red;">*</span></label>
-<select class="form-control" name="category" required="required">
+<select class="form-control" name="category" required>
 <option value=""> Select Category</option>
 <?php 
 $status=1;
@@ -106,7 +106,7 @@ foreach($results as $result)
 
 <div class="form-group">
 <label> Author<span style="color:red;">*</span></label>
-<select class="form-control" name="author" required="required">
+<select class="form-control" name="author" required>
 <option value=""> Select Author</option>
 <?php 
 

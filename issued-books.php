@@ -48,9 +48,25 @@ header('location:manage-books.php');
     <div class="content-wrapper">
          <div class="container">
         <div class="row pad-botm">
+           
             <div class="col-md-12">
+               	<?php 
+	
+					
+					if($_SESSION['msg'] != ""){
+						?>
+						<div class="alert alert-success" align="center"><?php echo($_SESSION['msg']) ?></div>
+						<?php
+					}
+					if($_SESSION['error'] != ""){
+						?>
+						<div class="alert alert-danger" align="center"><?php echo($_SESSION['error']) ?></div>
+						<?php
+					}
+				
+				?>
                 <h4 class="header-line">Manage Issued Books</h4>
-    </div>
+    		</div>
     
 
             <div class="row">
@@ -76,12 +92,13 @@ header('location:manage-books.php');
                                     <tbody>
 <?php 
 $sid=$_SESSION['stdid'];
-$sql="SELECT tblbooks.BookName,tblbooks.ISBNNumber,tblissuedbookdetails.IssuesDate,tblissuedbookdetails.ReturnDate,tblissuedbookdetails.id as rid,tblissuedbookdetails.fine from  tblissuedbookdetails join tblstudents on tblstudents.StudentId=tblissuedbookdetails.StudentId join tblbooks on tblbooks.id=tblissuedbookdetails.BookId where tblstudents.StudentId=:sid order by tblissuedbookdetails.id desc";
+$sql="SELECT `tblissuedbookdetails`.`BookId` , `tblissuedbookdetails`.`IssuesDate` ,`tblissuedbookdetails`.`ReturnDate`,`tblissuedbookdetails`.`fine` , `tblbooks`.`BookName` FROM `tblissuedbookdetails` ,`tblbooks` WHERE `tblissuedbookdetails`.`StudentID` = 'SID014' AND `tblbooks`.`ISBNNumber` = `tblissuedbookdetails`.`BookId`";
 $query = $dbh -> prepare($sql);
 $query-> bindParam(':sid', $sid, PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
+	
 if($query->rowCount() > 0)
 {
 foreach($results as $result)
@@ -89,7 +106,7 @@ foreach($results as $result)
                                         <tr class="odd gradeX">
                                             <td class="center"><?php echo htmlentities($cnt);?></td>
                                             <td class="center"><?php echo htmlentities($result->BookName);?></td>
-                                            <td class="center"><?php echo htmlentities($result->ISBNNumber);?></td>
+                                            <td class="center"><?php echo htmlentities($result->BookId);?></td>
                                             <td class="center"><?php echo htmlentities($result->IssuesDate);?></td>
                                             <td class="center"><?php if($result->ReturnDate=="")
                                             {?>
