@@ -108,7 +108,7 @@ Issued Book Details
 <form role="form" method="post">
 <?php 
 $rid=intval($_GET['rid']);
-$sql = "SELECT tblstudents.FullName,tblbooks.BookName,tblbooks.ISBNNumber,tblissuedbookdetails.IssuesDate,tblissuedbookdetails.ReturnDate,tblissuedbookdetails.id as rid,tblissuedbookdetails.fine,tblissuedbookdetails.RetrunStatus from  tblissuedbookdetails join tblstudents on tblstudents.StudentId=tblissuedbookdetails.StudentId join tblbooks on tblbooks.id=tblissuedbookdetails.BookId where tblissuedbookdetails.id=:rid";
+$sql = "SELECT `tblissuedbookdetails`.`BookId` ,`tblissuedbookdetails`.`id` , `tblissuedbookdetails`.`IssuesDate`,`tblissuedbookdetails`.`ReturnDate`,`tblissuedbookdetails`.`fine` , `tblbooks`.`BookName` ,`tblstudents`.`FullName` FROM`tblissuedbookdetails` ,`tblbooks`,`tblstudents` WHERE `tblbooks`.`ISBNNumber` = `tblissuedbookdetails`.`BookId` AND `tblstudents`.`StudentId` = `tblissuedbookdetails`.`StudentID` AND `tblissuedbookdetails`.`id` = $rid ";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':rid',$rid,PDO::PARAM_STR);
 $query->execute();
@@ -135,7 +135,7 @@ foreach($results as $result)
 
 <div class="form-group">
 <label>ISBN :</label>
-<?php echo htmlentities($result->ISBNNumber);?>
+<?php echo htmlentities($result->BookId);?>
 </div>
 
 <div class="form-group">

@@ -102,7 +102,7 @@ else{
                                         </tr>
                                     </thead>
                                     <tbody>
-<?php $sql = "SELECT `tblissuedbookdetails`.`BookId` , `tblissuedbookdetails`.`IssuesDate`,`tblissuedbookdetails`.`ReturnDate`,`tblissuedbookdetails`.`fine` , `tblbooks`.`BookName` ,`tblstudents`.`FullName` FROM`tblissuedbookdetails` ,`tblbooks`,`tblstudents` WHERE `tblbooks`.`ISBNNumber` = `tblissuedbookdetails`.`BookId` AND `tblstudents`.`StudentId` = `tblissuedbookdetails`.`StudentID`";
+<?php $sql = "SELECT `tblissuedbookdetails`.`BookId` ,`tblissuedbookdetails`.`id` , `tblissuedbookdetails`.`IssuesDate`,`tblissuedbookdetails`.`ReturnDate`,`tblissuedbookdetails`.`fine` , `tblbooks`.`BookName` ,`tblstudents`.`FullName` FROM`tblissuedbookdetails` ,`tblbooks`,`tblstudents` WHERE `tblbooks`.`ISBNNumber` = `tblissuedbookdetails`.`BookId` AND `tblstudents`.`StudentId` = `tblissuedbookdetails`.`StudentID` AND `tblissuedbookdetails`.`RetrunStatus` = 0";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -128,7 +128,7 @@ foreach($results as $result)
                                             ?></td>
                                             <td class="center">
 
-                                            <a href="update-issue-bookdeails.php?rid=<?php echo htmlentities($result->rid);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
+                                            <a href="update-issue-bookdeails.php?rid=<?php echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
                                          
                                             </td>
                                         </tr>

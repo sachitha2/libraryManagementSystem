@@ -124,14 +124,14 @@ $regstds=$query3->rowCount();
                             <i class="fa fa-user fa-5x"></i>
 <?php 
 $sq4 ="SELECT id from tblauthors ";
-$query4 = $dbh -> prepare($sql);
+$query4 = $dbh -> prepare($sq4);
 $query4->execute();
 $results4=$query4->fetchAll(PDO::FETCH_OBJ);
 $listdathrs=$query4->rowCount();
 ?>
 
 
-                            <h3><?php echo htmlentities($listdathrs);?></h3>
+                            <h3><?php echo($listdathrs);?></h3>
                       Authors Listed
                         </div>
                     </div>
@@ -142,7 +142,7 @@ $listdathrs=$query4->rowCount();
                             <i class="fa fa-file-archive-o fa-5x"></i>
 <?php 
 $sql5 ="SELECT id from tblcategory ";
-$query5 = $dbh -> prepare($sql1);
+$query5 = $dbh -> prepare($sql5);
 $query5->execute();
 $results5=$query5->fetchAll(PDO::FETCH_OBJ);
 $listdcats=$query5->rowCount();
