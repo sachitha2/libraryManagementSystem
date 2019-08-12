@@ -43,7 +43,6 @@
 			 	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				
-				<li><a href='dashboard.php'><span>Dashboard</span></a></li>
 				<li><a href='login.php'><span>User Login</span></a></li>
 				<li><a href='signup.php'><span>Signup</span></a></li>
 				<li><a href='adminLogin.php'><span>Admin</span></a></li>

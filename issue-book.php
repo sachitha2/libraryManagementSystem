@@ -16,14 +16,16 @@ if(isset($_POST['issue']))
 		//	print_r($_POST);
 		//check  book availability
  
-    	$sql ="SELECT BookName,id FROM tblbooks WHERE (ISBNNumber=:bookid)";
+    	$sql ="SELECT * FROM tblissuedbookdetails WHERE (BookId=:bookid) AND RetrunStatus = 0 ";
 		$query= $dbh -> prepare($sql);
 		$query-> bindParam(':bookid', $bookid, PDO::PARAM_STR);
 		$query-> execute();
 		$results = $query -> fetchAll(PDO::FETCH_OBJ);
 		if($query -> rowCount() == 0)
 		{
-			echo("Book available");
+			
+			$_SESSION['duplicateBook'] = "Book Available";
+//			echo("Book available");
 		  	//Book available
 			$studentid=strtoupper($_POST['studentid']);
 		
@@ -45,7 +47,8 @@ if(isset($_POST['issue']))
 			}
 		}
 		 else{	
-			 echo("Book not available");
+//			 echo("Book not available");
+			 $_SESSION['duplicateBook'] = "Book Not Available";
 			 //book  not available
 		}
 		//check  book availability	
@@ -121,9 +124,19 @@ error:function (){}
          <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
+               
                 <h4 class="header-line">Issue a New Book</h4>
-                
-                            </div>
+                <?php
+	
+					if($_SESSION['duplicateBook'] != ""){
+						?>
+						<div class="alert alert-success" align="center"><?php echo($_SESSION['duplicateBook']) ?></div>
+						<?php
+							$_SESSION['duplicateBook'] = "";
+					}
+					
+				?>
+            </div>
 
 </div>
 <div class="row">

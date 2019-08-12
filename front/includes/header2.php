@@ -39,18 +39,18 @@
 	<div class='h_btm'>
 		<div class='cssmenu'>
 			<ul>
-			    <li><a href='../index.php'><span>Home</span></a></li>
-				<li><a href='books.php'><span><b>Books</b></span></a></li>
-			    <li><a href='about.php'><span>About</span></a></li>
-			    <li><a href='contact.php'><span>Contact</span></a></li>
+			    <li><a href='http://localhost/library/index.php'><span>Home</span></a></li>
+				<li><a href='http://localhost/library/books.php'><span><b>Books</b></span></a></li>
+			    <li><a href='http://localhost/library/front/about.php'><span>About</span></a></li>
+			    <li><a href='http://localhost/library/front/contact.php'><span>Contact</span></a></li>
 			 	
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				
-				<li><a href='dashboard.php'><span>Dashboard</span></a></li>
-				<li><a href='../login.php'><span>User Login</span></a></li>
-				<li><a href='../signup.php'><span>Signup</span></a></li>
-				<li><a href='../adminlogin'><span>Admin</span></a></li>
+				<li><a href='http://localhost/library/dashboard.php'><span>Dashboard</span></a></li>
+				<li><a href='http://localhost/library/login.php'><span>User Login</span></a></li>
+				<li><a href='http://localhost/library/signup.php'><span>Signup</span></a></li>
+				<li><a href='http://localhost/library/adminlogin'><span>Admin</span></a></li>
 				<div class="clear"></div>
 			 </ul>
 	</div>
